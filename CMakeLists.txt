@@ -14,8 +14,9 @@ endif()
 project(MyRaylibProject)
 find_package(raylib QUIET) # QUIET or REQUIRED
 
-# if raylib is not found via find_package() and host is UNIX
+# if raylib is not found via find_package() and host is UNIX - check other directories
 if(NOT raylib_FOUND AND UNIX)
+    message("Checking additional directories")
     find_path(raylib_INCLUDE_DIRS raylib.h
         HINTS /usr/local/include /usr/include
     )
@@ -27,6 +28,7 @@ if(NOT raylib_FOUND AND UNIX)
     
     if(raylib_INCLUDE_DIRS AND raylib_LIBRARIES)
         set(raylib_FOUND TRUE)
+        message(STATUS "Raylib found")
     endif()
 endif()
 
